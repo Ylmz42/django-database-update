@@ -13,15 +13,9 @@ def index(request):
     if not request.user.is_authenticated:
         return render(request, 'project/login.html')
     else:
-        applications = Application.objects.all()
-        for aaa in applications:
-            b = aaa.username
-            c = b.split(',')
-            for d in c:
-                if d == request.user.username:
-                    f.append(aaa)
+        app = Application.deneme(request)
         projects = Project.objects.all()
-        return render(request, 'project/index.html',{'f':f, 'projects':projects})
+        return render(request, 'project/index.html',{'app':app, 'projects':projects})
 
 def register(request):
     form = UserForm(request.POST or None)

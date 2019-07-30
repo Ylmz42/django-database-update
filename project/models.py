@@ -27,6 +27,17 @@ class Application(models.Model):
     def __str__(self):
         return self.name + ' - ' + self.access + ' - ' + self.username + ' - ' + self.notes + ' - ' + self.checklist + ' - ' + self.reported
 
+    def deneme(ruser):
+        f = []
+        applications = Application.objects.all()
+        for aaa in applications:
+            b = aaa.username
+            c = b.split(',')
+            for d in c:
+                if d == ruser.user.username:
+                    f.append(aaa)
+        return f
+
 
 class CheckList(models.Model):
 
