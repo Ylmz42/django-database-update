@@ -66,18 +66,18 @@
             <th width="35%">Application Notes</th>
             <th width="10%">Finish</th>
           </tr>
-          {% for b in applications %}
-          {% if b.project.id == a.id %}
-          <tr>
-            <td><input type="checkbox" name="{{a.id}}"></td>
-            <td><a href="/{{b.project.pk}}">{{a}}</a></td>
-            <td>{{b.project.situation}}</td>
-            <td>{{b.name}}</td>
-            <td>{{b.access}}</td>
-            <td>{{b.notes}}</td>
-            <td><span class="glyphicon glyphicon-unchecked"></span>OK</td>
-          </tr>
-          {% endif %}
+          {% for b in f %}
+            {% if b.project.id == a.id %}
+            <tr>
+              <td><input type="checkbox" name="{{a.id}}"></td>
+              <td><a href="/{{b.project.pk}}">{{a}}</a></td>
+              <td>{{b.project.situation}}</td>
+              <td>{{b.name}}</td>
+              <td>{{b.access}}</td>
+              <td>{{b.notes}}</td>
+              <td><span class="glyphicon glyphicon-unchecked"></span>OK</td>
+            </tr>
+            {% endif %}
           {% endfor %}
         </table>
         <br>

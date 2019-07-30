@@ -9,29 +9,19 @@ import sqlite3
 # Create your views here.
 
 def index(request):
+    f = []
     if not request.user.is_authenticated:
         return render(request, 'project/login.html')
     else:
-        projects = Project.objects.filter(user=request.user)
         applications = Application.objects.all()
-        query = request.GET.get("q")
-        if query:
-            projects = projects.filter(
-                Q(name__icontains=query)
-            ).distinct()
-            applications = applications.filter(
-                Q(name__icontains=query)
-            ).distinct()
-            return render(request, 'project/index.html',
-            {
-                'projects':projects,
-                'applications':applications
-            })
-        else:
-            return render(request, 'project/index.html', {'projects': projects})
-    #applications = Application.objects.all()
-    #projects = Project.objects.all()
-    #return render(request, 'project/index.html',{'applications':applications, 'projects':projects})
+        for aaa in applications:
+            b = aaa.username
+            c = b.split(',')
+            for d in c:
+                if d == request.user.username:
+                    f.append(aaa)
+        projects = Project.objects.all()
+        return render(request, 'project/index.html',{'f':f, 'projects':projects})
 
 def register(request):
     form = UserForm(request.POST or None)
